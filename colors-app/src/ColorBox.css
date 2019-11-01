@@ -16,7 +16,8 @@
     background-color: black;
 }
 
-.copy-button, .back-button {
+.copy-button, 
+.back-button {
     position: absolute;
     width: 100px;
     height: 30px;
