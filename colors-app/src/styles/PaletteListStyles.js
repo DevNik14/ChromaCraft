@@ -14,11 +14,13 @@ export default {
         flexWrap: 'wrap'
     },
     nav: {
-        display: 'flex',
         width: '100%',
+        color: 'white',
+        display: 'flex',
         justifyContent: 'space-between',
-        '& h1': {
-            color: 'white'
+        alignItems: 'center',
+        '& a': {
+            color: '#fff'
         }
     },
     palettes: {
