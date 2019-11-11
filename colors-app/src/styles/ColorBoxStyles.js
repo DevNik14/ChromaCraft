@@ -38,7 +38,7 @@ export default {
     },
     copyButton: {
         color: props => 
-            chroma(props.background).luminance() >= 0.7 ? 'rgba(0, 0, 0, 0.5)' : '#fff', 
+            chroma(props.background).luminance() >= 0.7 ? 'rgba(0, 0, 0, 0.6)' : '#fff', 
         position: 'absolute',
         width: '100px',
         height: '30px',

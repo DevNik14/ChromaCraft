@@ -91,7 +91,8 @@ class NewPaletteForm extends Component {
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.addNewColor = this.addNewColor.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit=this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.removeColor = this.removeColor.bind(this);
   }
 
   componentDidMount() {
@@ -132,22 +133,28 @@ class NewPaletteForm extends Component {
     this.setState({colors: [...this.state.colors, newColor], newColorName: ''});
   };
 
-    handleChange(evt) {
-        this.setState({
-          [evt.target.name]: evt.target.value
-        });
+  handleChange(evt) {
+      this.setState({
+        [evt.target.name]: evt.target.value
+      });
   };
 
-    handleSubmit() {
-        let newName = this.state.newPaletteName;
-        const newPalette = {
-            paletteName: newName,
-            id: newName.toLowerCase().replace(' ', '-'),
-            colors: this.state.colors
-        };
+  handleSubmit() {
+      let newName = this.state.newPaletteName;
+      const newPalette = {
+          paletteName: newName,
+          id: newName.toLowerCase().replace(' ', '-'),
+          colors: this.state.colors
+      };
 
-    this.props.savePalette(newPalette);
-    this.props.history.push('/');
+  this.props.savePalette(newPalette);
+  this.props.history.push('/');
+  }
+
+  removeColor(colorName) {
+    this.setState({
+      colors: this.state.colors.filter(color => color.name !== colorName)
+    })
   }
 
   render() {
@@ -250,7 +257,12 @@ class NewPaletteForm extends Component {
           <div className={classes.drawerHeader} />
             {
               colors.map(color => (
-                <DragableColorBox color={color.color} name={color.name}/>
+                <DragableColorBox 
+                  key={color.name}
+                  color={color.color} 
+                  name={color.name} 
+                  handleClick={() => this.removeColor(color.name)}
+                />
               ))
             }
         </main>
