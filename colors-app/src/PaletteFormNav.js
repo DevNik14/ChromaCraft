@@ -9,6 +9,39 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { Button } from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
+
+const drawerWidth = 400;
+
+const styles = theme => ({
+    root: {
+        display: 'flex'
+    },
+    appBar: {
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        height: '64px'
+      },
+    appBarShift: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      },
+    menuButton: {
+        marginLeft: 12,
+        marginRight: 20,
+      },
+    navBtns: {
+
+    }
+})
 
 class PaletteFormNav extends Component {
     constructor(props) {
@@ -38,7 +71,7 @@ class PaletteFormNav extends Component {
         const { newPaletteName } = this.state;
         const { classes, open, handleDrawerOpen } = this.props;
         return (
-            <div>
+            <div className={classes.root}>
                 <CssBaseline />
                 <AppBar
                 position="fixed"
@@ -49,16 +82,18 @@ class PaletteFormNav extends Component {
                 >
                 <Toolbar disableGutters={!open}>
                     <IconButton
-                    color="inherit"
-                    aria-label="Open drawer"
-                    onClick={handleDrawerOpen}
-                    className={classNames(classes.menuButton, open && classes.hide)}
+                        color="inherit"
+                        aria-label="Open drawer"
+                        onClick={handleDrawerOpen}
+                        className={classNames(classes.menuButton, open && classes.hide)}
                     >
                     <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" color="inherit" noWrap>
-                    Persistent drawer
+                    Create A Palette
                     </Typography>
+                </Toolbar>
+                <div className={classes.navBtns}>
                     <ValidatorForm onSubmit={() => this.props.handleSubmit(newPaletteName)}>
                     <TextValidator 
                         label="Palette Name"
@@ -75,15 +110,15 @@ class PaletteFormNav extends Component {
                     >
                         Save Palette
                     </Button>
+                    </ValidatorForm>
                     <Link to="/">
                         <Button variant="contained" color="se">Go Back</Button>
                     </Link>
-                    </ValidatorForm>
-                </Toolbar>
+                </div>
                 </AppBar>
             </div>
             )
     }
 }
 
-export default PaletteFormNav;
+export default withStyles(styles, { withTheme: true })(PaletteFormNav);
