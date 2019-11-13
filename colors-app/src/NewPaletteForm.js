@@ -117,15 +117,12 @@ class NewPaletteForm extends Component {
       });
   };
 
-  handleSubmit(newPaletteName) {
-    const newPalette = {
-        paletteName: newPaletteName,
-        id: newPaletteName.toLowerCase().replace(' ', '-'),
-        colors: this.state.colors
-    };
-
-  this.props.savePalette(newPalette);
-  this.props.history.push('/');
+  handleSubmit(newPalette) {
+    newPalette.id = newPalette.paletteName.toLowerCase().replace(' ', '-');
+    newPalette.colors = this.state.colors;
+    
+    this.props.savePalette(newPalette);
+    this.props.history.push('/');
   }
 
   removeColor(colorName) {
