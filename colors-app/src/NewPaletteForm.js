@@ -89,7 +89,7 @@ class NewPaletteForm extends Component {
 
   render() {
     const { classes, maxColors, palettes } = this.props;
-    const { open, currentColor, colors, newColorName } = this.state;
+    const { open, colors } = this.state;
     const paletteIsFull = colors.length >= maxColors;
 
     return (
